@@ -128,7 +128,7 @@ export default function SignIn() {
 			<div className="hidden xl:block xl:w-[85%] min-h-screen bg-authImg bg-center bg-cover"></div>
 			<div className="xl:w-[75%] my-20">
 				<Link to="/" className="flex justify-center items-center mb-16 cursor-pointer">
-					<img src={logo} alt="" className="w-[50%]" />
+					<img src={logo} alt="" className="w-[10%]" />
 				</Link>
 				<form onSubmit={handleSubmitSignIn}>
 					<div className="mb-4">

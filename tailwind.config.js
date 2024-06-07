@@ -55,6 +55,7 @@ module.exports = {
 				darkBlue: "#12326B",
 				black4: "#121212",
 				green: "#059669",
+				notify: "rgb(47, 150, 180)"
 			},
 			boxShadow: {
 				default: "0px 8px 13px -3px rgba(0, 0, 0, 0.07)",
