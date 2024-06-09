@@ -59,9 +59,11 @@ export default function SignIn() {
 			const result = await signInWithPopup(auths, provider);
 			const { user } = result;
 			localStorage.setItem("token", user.refreshToken);
-			notify("Sign Successful");
 			// Check if the user already exists in Firestore
 			const userDoc = await getDoc(doc(db, "users", user.uid));
+			if(user){
+				notify("Sign Successful");
+			}
 			if (user.displayName) {
 				if (!userDoc.exists()) {
 					const [firstname, lastname] = user.displayName?.split(" ");
@@ -78,7 +80,7 @@ export default function SignIn() {
 						password: "",
 						gender: "",
 						joinedDate: new Date().toDateString(),
-						status: "Active",
+						status: "pending",
 					});
 
 					await setDoc(doc(db, "deposits", user.uid), {
@@ -128,7 +130,7 @@ export default function SignIn() {
 			<div className="hidden xl:block xl:w-[85%] min-h-screen bg-authImg bg-center bg-cover"></div>
 			<div className="xl:w-[75%] my-20">
 				<Link to="/" className="flex justify-center items-center mb-16 cursor-pointer">
-					<img src={logo} alt="" className="w-[10%]" />
+					<img src={logo} alt="" className="w-[15%]" />
 				</Link>
 				<form onSubmit={handleSubmitSignIn}>
 					<div className="mb-4">

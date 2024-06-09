@@ -20,7 +20,7 @@ const Asset = (props: Props) => {
           totalEth={`0.03185058 `}
         />
       </div>
-      <div className="mb-20 grid xl:grid-cols-4 gap-10">
+      <div className="mb-20 grid xl:grid-cols-4 gap-y-5 gap-x-3">
         <SingleTicker
           symbol="BTCUSD"
           colorTheme="dark"

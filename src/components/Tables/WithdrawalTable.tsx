@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../../context/UserContext";
-import { Withdrawal, WithdrawalState } from "../../types/types";
+import { Withdrawal} from "../../types/types";
 // import { withdrawalData } from "../dashboards/data";
 
 export default function WithdrawalTable() {
-
   const [withdrawalData, setWithdrawalData] = useState<Withdrawal[]>([]);
 
   const { state } = useUserContext();
@@ -18,7 +17,7 @@ export default function WithdrawalTable() {
 
   return (
     <>
-      <div className="rounded-sm text-white bg-boxdark px-5 pt-6 pb-2.5 shadow-default  dark:bg-transparent sm:px-7.5 xl:pb-1">
+      <div className="rounded-sm  bg-boxdark px-5 pt-6 pb-2.5 shadow-default  dark:bg-transparent sm:px-7.5 xl:pb-1">
         <h2 className="font-bold text-xl mb-5">Withdrawal History</h2>
         <div className="max-w-full overflow-x-auto">
           <table className="w-full table-auto">
@@ -49,19 +48,15 @@ export default function WithdrawalTable() {
                       </h5>
                     </td>
                     <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-
                       <h5 className="font-medium text-white dark:text-white">
-
                         ${data.amount}
                       </h5>
                     </td>
                     <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                       <p
                         className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${
-
                           data.status === "completed"
                             ? "text-success bg-success"
-
                             : "text-warning bg-warning"
                         }`}
                       >
@@ -70,7 +65,6 @@ export default function WithdrawalTable() {
                     </td>
                     <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                       <h5 className="font-medium text-white dark:text-white">
-
                         {data.date}
                       </h5>
                     </td>
@@ -82,7 +76,6 @@ export default function WithdrawalTable() {
         {withdrawalData.length < 1 && (
           <p className="text-center mt-5 py-4 text-xl">No Recent Withdrawal</p>
         )}
-
       </div>
     </>
   );

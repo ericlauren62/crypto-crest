@@ -1,11 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../images/LOGO-DARK.svg";
+import logo from "../images/crest-logo.svg";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { auth, db } from "../lib/firebase";
-import { useUserContext } from "../context/UserContext";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function AdminSignIn() {
@@ -31,12 +30,12 @@ export default function AdminSignIn() {
         formData.password
       );
 
-      const adminRef = doc(db, "admin", "QX6jHyNRZzKBDoIrVFD0");
+      const adminRef = doc(db, "admin", "VGRS1zWGzCbgOkAo5iY7QgXyh2t2");
       const adminSnap = await getDoc(adminRef);
       const adminData = adminSnap.data();
 
       const userEmail = data.user.email;
-      if (userEmail === adminData?.email) {
+      if (userEmail?.toLowerCase() === adminData?.email.toLowerCase()) {
         localStorage.setItem("adminToken", data.user.refreshToken);
         navigate("/admin/dashboard");
         return true;
@@ -65,7 +64,7 @@ export default function AdminSignIn() {
           to="/"
           className="flex justify-center items-center mb-16 cursor-pointer"
         >
-          <img src={logo} alt="" className="w-[50%]" />
+          <img src={logo} alt="" className="w-[15%]" />
         </Link>
         <form onSubmit={handleSubmitSignIn}>
           <div className="mb-4">

@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import heroImage from "../../images/heroImg.webp";
-import referralBonusImg from "../../images/referral-img.jpg";
+
 import VideoBackground from "../sharedUi/VideoBackground";
 import Button from "../Button";
 import { TickerTape } from "react-ts-tradingview-widgets";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 export default function Hero() {
 	// useEffect(() => {

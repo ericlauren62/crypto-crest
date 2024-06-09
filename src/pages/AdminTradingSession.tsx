@@ -1,8 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import Modal from "../components/Modals/Modal";
-import { history, usersInfo } from "../components/dashboards/data";
-import UploadButton from "../components/sharedUi/UploadButton";
 import { SearchBar } from "../components/sharedUi/Searchbar";
 import { Pagination } from "../components/sharedUi/Pagination";
 import { useAdminContext } from "../context/AdminContext";
@@ -10,25 +8,9 @@ import { TradeState } from "../types/types";
 
 type Props = {};
 
-interface UserTradeHistoriesProps {
-  fullname: string;
-  tradeType: string;
-  tradeOption: string;
-  pairs: string;
-  lotSize: string;
-  entry: string;
-  stopLoss: string;
-  takeProfit: string;
-  profit: string;
-  status: string;
-  result: string;
-  date: string;
-  userId: string;
-  id: string;
-}
+
 
 const AdminTradingSession = (props: Props) => {
-  const [loading, setLoading] = useState<{ [id: string]: boolean }>({});
   const [showModal, setShowModal] = useState(false);
   const [userId, setUserId] = useState("");
   const [tradeId, setTradeId] = useState("");
@@ -164,7 +146,7 @@ const AdminTradingSession = (props: Props) => {
           </div>
         </form>
       </Modal>
-      {trades?.length > 0 && (
+     
         <div className="rounded-sm border px-5 pt-6 pb-2.5 shadow-default border-strokedark bg-boxdark sm:px-7.5 xl:pb-1">
           <h2 className="font-bold text-xl mb-5 p-4 text-white rounded-md ">
             ALL TRADES SESSIONS
@@ -293,7 +275,7 @@ const AdminTradingSession = (props: Props) => {
 
                     <td className="border py-5 px-4 flex items-center gap-x-2 border-strokedark">
                       <button
-                        onClick={() => handleShowModal(trade?.id, trade?.uid)}
+                        onClick={() => handleShowModal(trade.id, trade.uid)}
                         className="w-[110px] rounded-md  bg-meta-3 text-white py-2 px-3 flex items-center justify-center  gap-x-2"
                       >
                         Update
@@ -310,7 +292,7 @@ const AdminTradingSession = (props: Props) => {
             onPageChange={handlePageChange}
           />
         </div>
-      )}
+      
     </AdminLayout>
   );
 };

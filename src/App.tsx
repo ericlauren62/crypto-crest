@@ -1,7 +1,7 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect} from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
-import { UserProvider, useUserContext } from "./context/UserContext";
+import { UserProvider} from "./context/UserContext";
 import Loader from "./components/ui/Loader";
 import Settings from "./pages/Settings";
 import { Toaster } from "react-hot-toast";
@@ -45,6 +45,14 @@ const AdminSubscription = lazy(() => import("./pages/AdminSubscription"));
 const AdminVerifications = lazy(() => import("./pages/AdminVerifications"));
 const AdminNotification = lazy(() => import("./pages/AdminNotification"));
 const AdminSignIn = lazy(() => import("./pages/AdminSignIn"));
+
+
+declare global {
+  interface Window {
+    Tawk_API: any;
+    Tawk_LoadStart: Date;
+  }
+}
 
 const router = createBrowserRouter([
   {
@@ -250,6 +258,27 @@ function App() {
 
     // Clear the timer when the component unmounts or when the expiration time changes
     return () => clearTimeout(tokenExpirationTimer);
+  }, []);
+
+  
+
+
+
+  useEffect(() => {
+    // Create a script element
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_LoadStart = new Date();
+
+    (function() {
+      const s1 = document.createElement('script');
+      const s0 = document.getElementsByTagName('script')[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/6661e1639a809f19fb3a395f/1hvn5gt11';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode?.insertBefore(s1, s0);
+    })();
+
+    
   }, []);
 
   return (

@@ -1,6 +1,6 @@
 import MainLayout from "../components/layouts/MainLayout";
 import Hero from "../components/home/Hero";
-import Stats from "../components/home/Stats";
+// import Stats from "../components/home/Stats";
 import Steps from "../components/home/Steps";
 import WhyChooseUs from "../components/home/WhyChooseUs";
 import AssetsYouCanTrade from "../components/home/AssetsYouCanTrade";

@@ -1,11 +1,9 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
-import UploadButton2 from "../components/sharedUi/UploadButton2";
 import { MdDeleteForever } from "react-icons/md";
 import Modal from "../components/Modals/Modal";
-import { usersInfo } from "../components/dashboards/data";
 import { SearchBar } from "../components/sharedUi/Searchbar";
-import { User, UserState } from "../types/types";
+import { User} from "../types/types";
 import { Pagination } from "../components/sharedUi/Pagination";
 import { useAdminContext } from "../context/AdminContext";
 
@@ -15,10 +13,6 @@ const Users = (props: Props) => {
   const [currentUserId, setCurrentUserId] = useState<any>("");
   const [showModal, setShowModal] = useState(false);
   const [userInput, setUserInput] = useState("");
-  const [loading, setLoading] = useState<{ [currentUserId: string]: boolean }>(
-    {}
-  );
-
   const [allowDeleteUser, setAllowDeleteUser] = useState(false);
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -29,7 +23,7 @@ const Users = (props: Props) => {
 
   useEffect(() => {
     setFilteredUsers(state.users);
-  }, []);
+  }, [state.users]);
 
   useEffect(() => {
     const results = state.users?.filter(
@@ -72,7 +66,7 @@ const Users = (props: Props) => {
   };
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setUserInput(e.target.value);
+    setUserInput(e.target.value.toLowerCase());
   };
 
   const handleDeleteUser = (userId: string) => {
@@ -146,21 +140,21 @@ const Users = (props: Props) => {
               className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-meta-3 active:border-meta-3"
             >
               <option value="">Choose Status</option>
-              <option value="Active">Active</option>
-              <option value="Pending">Pending</option>
-              <option value="Signal Fee">Signal Fee</option>
-              <option value="Upgrade">Upgrade</option>
-              <option value="Insurance">Insurance</option>
-              <option value="Stamp Duty">Stamp Duty</option>
-              <option value="Trading Time">Trading Time</option>
-              <option value="IRS">IRS</option>
-              <option value="Broker Fee">Broker Fee</option>
-              <option value="Account Management Fee">
+              <option value="active">Active</option>
+              <option value="pending">Pending</option>
+              <option value="signal fee">Signal Fee</option>
+              <option value="upgrade">Upgrade</option>
+              <option value="insurance">Insurance</option>
+              <option value="stamp duty">Stamp Duty</option>
+              <option value="trading time">Trading Time</option>
+              <option value="irs">IRS</option>
+              <option value="broker fee">Broker Fee</option>
+              <option value="account management fee">
                 Account Management Fee
               </option>
-              <option value="Cost of Transfer">Cost of Transfer</option>
-              <option value="Withdrawal Fee">Withdrawal Fee</option>
-              <option value="Trade Commission Fee">Trade Commission Fee</option>
+              <option value="cost of transfer">Cost of Transfer</option>
+              <option value="withdrawal fee">Withdrawal Fee</option>
+              <option value="trade commission fee">Trade Commission Fee</option>
             </select>
           </div>
 
@@ -180,7 +174,7 @@ const Users = (props: Props) => {
           </div>
         </form>
       </Modal>
-      {filteredUsers?.length > 0 ? (
+      {filteredUsers?.length > 0 && (
         <div className="min-h-screen rounded-sm border  px-5 pt-6 pb-2.5 shadow-default border-strokedark bg-boxdark sm:px-7.5 xl:pb-1">
           <h2 className="font-bold text-xl mb-5  p-4 text-white rounded-md ">
             ALL USERS
@@ -267,7 +261,7 @@ const Users = (props: Props) => {
                     <td className="border  py-5 px-4 border-strokedark">
                       <p
                         className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${
-                          userItem.status === "Active"
+                          userItem.status === "active"
                             ? "text-success bg-success"
                             : "text-warning bg-warning"
                         }`}
@@ -276,7 +270,9 @@ const Users = (props: Props) => {
                       </p>
                     </td>
                     <td className="border  py-5 px-4 border-strokedark">
-                      <p className="text-white">{userItem?.joinedDate}</p>
+                      <p className="text-white">
+                        {userItem?.joinedDate}
+                      </p>
                     </td>
                     <td className="border  py-5 px-4 flex items-center gap-x-2 border-strokedark">
                       <button
@@ -304,12 +300,6 @@ const Users = (props: Props) => {
             onPageChange={handlePageChange}
           />
         </div>
-      ) : (
-        <tr>
-          <td className="border  py-5 px-4 border-strokedark">
-            <p className="text-white">There are no user datas </p>
-          </td>
-        </tr>
       )}
     </AdminLayout>
   );

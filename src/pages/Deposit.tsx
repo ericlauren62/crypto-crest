@@ -74,38 +74,40 @@ const Deposit = (props: Props) => {
     <AdminLayout>
       <div className="mb-10 rounded-sm border  bg-boxdark shadow-default border-strokedark ">
         <div className="border-b  py-4 px-6 border-strokedark">
-          <h3 className="font-medium text-white">DEPOSIT USING BITCOIN</h3>
+          <h3 className="font-medium text-white">
+            DEPOSIT USING BITCOIN
+          </h3>
         </div>
         <div className="p-6">
-          <div className="mb-4 text-white">
-            <label className="mb-2.5 block  dark:text-white">
+          <div className="mb-4">
+            <label className="mb-2.5 block text-white">
               BITCOIN WALLET
             </label>
             <input
               type="text"
               readOnly
               value="bc1qma2yfzvsquhhj0yq7rn7qxmaj56wh72h0hfmnk"
-              className="w-full rounded border-[1.5px] border-strokedark bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
+              className="w-full rounded border-[1.5px] text-white border-strokedark bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
             />
           </div>
         </div>
       </div>
-      <div className="mb-5 rounded-sm border text-white bg-boxdark shadow-default border-strokedark ">
+      <div className="mb-5 rounded-sm border  bg-boxdark shadow-default border-strokedark ">
         <div className="border-b  py-4 px-6 border-strokedark">
-          <h3 className="font-medium text-white dark:text-white">
+          <h3 className="font-medium text-white">
             DEPOSIT USING ETHEREUM
           </h3>
         </div>
         <div className="p-6">
           <div className="mb-4">
-            <label className="mb-2.5 block text-white dark:text-white">
+            <label className="mb-2.5 block text-white">
               ETHEREUM WALLET
             </label>
             <input
               type="text"
               readOnly
               value="0x51C5D2a3BF1441Fb3BA8b10f3d33C37ae80565E2"
-              className="w-full rounded border-[1.5px] border-strokedark bg-transparent py-3 px-5 font-medium outline-none transition focus:border-meta-3 active:border-meta-3 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
+              className="w-full rounded border-[1.5px] text-white border-strokedark bg-transparent py-3 px-5 font-medium outline-none transition focus:border-meta-3 active:border-meta-3 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
             />
           </div>
         </div>
@@ -124,7 +126,7 @@ const Deposit = (props: Props) => {
         <div className="mt-14 md:mt-0 flex items-center justify-between mb-5 overflow-auto">
           <h3 className="text-xl font-bold">Submit Notification for Deposit</h3>
           <button
-            className="dark:text-white text-xl border border-black"
+            className="text-xl border border-black"
             onClick={closeModal}
           >
             <FaTimes />
@@ -136,8 +138,8 @@ const Deposit = (props: Props) => {
           here and fill the deposit notification form.
         </p>
         <form onSubmit={handleSubmit}>
-          <div className="relative z-20 bg-boxdark mb-4">
-            <label className="mb-2.5 block text-white dark:text-white">
+          <div className="relative z-20 bg-transparent mb-4">
+            <label className="mb-2.5 block text-white">
               Select Payment Method
             </label>
             <select
@@ -145,7 +147,7 @@ const Deposit = (props: Props) => {
               value={formData.paymentMethod}
               required
               onChange={handleInputChange}
-              className="relative z-20 w-full appearance-none rounded border border-strokedark bg-boxdark text-white py-3 px-5 outline-none transition focus:border-meta-3 active:border-meta-3 dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
+              className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-meta-3 active:border-meta-3 dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
             >
               <option value="">Select Payment</option>
               <option value="Bitcoin">Bitcoin Payment</option>
@@ -153,7 +155,7 @@ const Deposit = (props: Props) => {
             </select>
           </div>
           <div className="relative z-20 bg-transparent mb-4">
-            <label className="mb-2.5 block text-white dark:text-white">
+            <label className="mb-2.5 block text-white">
               Amount In Dollar($)
             </label>
             <input
@@ -167,7 +169,7 @@ const Deposit = (props: Props) => {
             />
           </div>
           <div className="mb-8">
-            <label className="mb-3 block text-white dark:text-white">
+            <label className="mb-3 block text-white">
               Upload Payment Receipt
             </label>
             <input

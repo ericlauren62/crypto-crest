@@ -15,10 +15,7 @@ const Account = (props: Props) => {
     profit: "",
     bonus: "",
   });
-  const [userId, setUserId] = useState("");
-  const [loading, setLoading] = useState<{ [currentUserId: string]: boolean }>(
-    {}
-  );
+  const [userId, setUserId] = useState("")
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredAccount, setFilteredAccount] = useState<AccountState[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -90,6 +87,8 @@ const Account = (props: Props) => {
     setAccountInput((prev) => {
       return { ...prev, balance, profit, bonus };
     });
+
+    
   };
 
   return (
@@ -103,7 +102,7 @@ const Account = (props: Props) => {
       >
         <form onSubmit={handleSubmit}>
           <div className="mb-5 mt-10">
-            <label className="mb-2.5 block font-medium text-black">
+            <label className="mb-2.5 block font-medium text-white">
               Account Balance
             </label>
             <div className="relative">
@@ -119,7 +118,7 @@ const Account = (props: Props) => {
             </div>
           </div>
           <div className="mb-5">
-            <label className="mb-2.5 block font-medium text-black">
+            <label className="mb-2.5 block font-medium text-white">
               Profit
             </label>
             <div className="relative">
@@ -135,7 +134,7 @@ const Account = (props: Props) => {
             </div>
           </div>
           <div>
-            <label className="mb-2.5 block font-medium text-black">Bonus</label>
+            <label className="mb-2.5 block font-medium text-white">Bonus</label>
             <div className="relative">
               <input
                 type="text"

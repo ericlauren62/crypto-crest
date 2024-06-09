@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { AdminLayout } from "../components/layouts/AdminLayout";
 import { FaCheckCircle } from "react-icons/fa";
 import { SubscriptionCard } from "../components/dashboards/SuscriptionCard";

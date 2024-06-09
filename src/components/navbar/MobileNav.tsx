@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 import logo from "../../images/crest-logo.svg";
 import { useEffect, useState } from "react";
 
-import { RiArrowRightSLine } from "react-icons/ri";
 
 export default function MobileNav() {
 	const [isMarketMenuOpen, setIsMarketMenuOpen] = useState(false);
 	const [isPlatformMenuOpen, setIsPlatformMenuOpen] = useState(false);
 	const [isAboutMenuOpen, setIsAboutMenuOpen] = useState(false);
-	const [isEducationMenuOpen, setIsEducationMenuOpen] = useState(false);
 
 	const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -117,52 +115,6 @@ export default function MobileNav() {
 						</li>
 					</ul>
 				</li>
-				{/* <li
-          className="relative "
-          onClick={() => setIsEducationMenuOpen(!isEducationMenuOpen)}
-        >
-          <div className="font-medium text-lg hover:text-primary-hover cursor-pointer">
-            Education
-          </div>
-          <ul
-            className={`px-4 flex flex-col gap-y-4 mt-5 ${
-              isEducationMenuOpen ? "block" : "hidden"
-            }`}
-          >
-            <li>
-              <Link
-                className="hover:text-primary-hover"
-                to="/education/learn-cfds"
-              >
-                Learn to trade CFDS
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="hover:text-primary-hover"
-                to="/education/learn-forex"
-              >
-                Learn to trade Forex
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="hover:text-primary-hover"
-                to="/education/learn-shares"
-              >
-                Learn to trade Shares
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="hover:text-primary-hover"
-                to="/education/trading-guides"
-              >
-                Trading guides
-              </Link>
-            </li>
-          </ul>
-        </li> */}
 
 				<div className="">
 					<div className=" flex flex-col  items-center gap-y-4">

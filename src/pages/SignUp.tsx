@@ -22,9 +22,6 @@ interface Country {
 
 export default function SignUp() {
 	const [countries, setCountries] = useState<Country[] | null>(null);
-	const [error, setError] = useState<string | null>(null);
-
-	const [loading, setLoading] = useState(false);
 
 	const [formData, setFormData] = useState({
 		firstname: "",
@@ -82,7 +79,7 @@ export default function SignUp() {
 						password: "",
 						gender: "",
 						joinedDate: new Date().toDateString(),
-						status: "Active",
+						status: "pending",
 						// 	// Other user data you may want to save
 					});
 
@@ -128,8 +125,7 @@ export default function SignUp() {
 		e.preventDefault();
 
 		if (formData.password !== formData.confirmPassword) {
-			setError("Password Mismatch: Password and Confirm Password not the same");
-			setLoading(false);
+			toast.error("Password Mismatch: Password and Confirm Password not the same")
 			return;
 		}
 
@@ -158,7 +154,7 @@ export default function SignUp() {
 					gender: formData.gender,
 					photoUrl: res.user.photoURL,
 					joinedDate: new Date().toDateString(),
-					status: "Active",
+					status: "pending",
 				});
 
 				await setDoc(doc(db, "deposits", res.user.uid), {
@@ -196,7 +192,6 @@ export default function SignUp() {
 	};
 
 	useEffect(() => {
-		setError(null);
 
 		const getCountries = async () => {
 			try {
@@ -204,7 +199,7 @@ export default function SignUp() {
 				const data = res.data;
 				setCountries(data.data);
 			} catch (error: any) {
-				setError(error.message);
+				toast.error(error.message)
 			}
 		};
 		getCountries();
@@ -215,7 +210,7 @@ export default function SignUp() {
 			<div className="hidden xl:block xl:w-[85%] min-h-screen bg-authImg bg-center bg-cover"></div>
 			<div className="xl:w-[75%] my-10">
 				<Link to="/" className="flex justify-center items-center mb-16 cursor-pointer">
-					<img src={logo} alt="" className="w-[50%]" />
+					<img src={logo} alt="" className="w-[15%]" />
 				</Link>
 				<form onSubmit={handleSubmitSignUp}>
 					<div className="mb-4 xl:flex gap-x-3">
