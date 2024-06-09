@@ -9,10 +9,12 @@ import {
 	VerificationState,
 	Withdrawal,
 	WithdrawalState,
+	AdminInfo
 } from "../types/types";
-import { db } from "../lib/firebase";
+import { auth, db } from "../lib/firebase";
 import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
+import { onAuthStateChanged } from "firebase/auth";
 
 interface AdminContextType {
 	state: AdminState;
@@ -24,6 +26,7 @@ interface AdminContextType {
 	updateDeposit: (id: string, uid: string) => void;
 	updateAccount: (uid: string, payload: AccountState) => void;
 	updateUser: (uid: string, status: string) => void;
+	updatePayment: (payload: AdminInfo) => void;
 }
 
 interface AdminState {
@@ -34,6 +37,7 @@ interface AdminState {
 	trades: TradeState[];
 	subscriptions: SubscriptionState[];
 	verifications: VerificationState[];
+	adminData: AdminInfo
 }
 
 type Action =
@@ -44,7 +48,8 @@ type Action =
 	| { type: "GET_ALL_SUBSCRIPTIONS"; payload: SubscriptionState[] }
 	| { type: "GET_ALL_TRADES"; payload: TradeState[] }
 	| { type: "GET_ALL_VERIFICATIONS"; payload: VerificationState[] }
-	| { type: "UPDATE_VERIFICATIONS"; payload: VerificationState };
+	| { type: "UPDATE_VERIFICATIONS"; payload: VerificationState }
+	| { type: "FETCH_ADMIN_DATA"; payload: AdminInfo };
 
 const initialState: AdminState = {
 	users: [],
@@ -54,6 +59,7 @@ const initialState: AdminState = {
 	trades: [],
 	subscriptions: [],
 	verifications: [],
+	adminData: {bitcoin: "", ethereum: "", email: ""}
 };
 
 const AdminContext = createContext<AdminContextType>({
@@ -66,6 +72,7 @@ const AdminContext = createContext<AdminContextType>({
 	updateDeposit: () => null,
 	updateAccount: () => null,
 	updateUser: () => null,
+	updatePayment: () => null
 });
 
 const adminReducer = (state: AdminState, action: Action): AdminState => {
@@ -86,6 +93,8 @@ const adminReducer = (state: AdminState, action: Action): AdminState => {
 			return { ...state, verifications: action.payload };
 		case "UPDATE_VERIFICATIONS":
 			return { ...state };
+		case "FETCH_ADMIN_DATA":
+			return  {...state, adminData: action.payload }
 
 		default:
 			return state;
@@ -95,8 +104,7 @@ const adminReducer = (state: AdminState, action: Action): AdminState => {
 export default function AdminProvider({ children }: { children: ReactNode }) {
 	const [state, dispatch] = useReducer(adminReducer, initialState);
 	const [refresh, setRefresh] = useState(false);
-
-	useEffect(() => {}, []);
+	const [adminUid, setAdminUid] = useState("")
 
 	useEffect(() => {
 		fetchAllUsers();
@@ -106,9 +114,29 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
 		fetchAllTradeSessions();
 		fetchAllVerifications();
 		fetchAllSubscription();
-
 		setRefresh(false);
 	}, [refresh]);
+
+	useEffect(() => {
+		const unSub = onAuthStateChanged(auth,async (user) => {
+		  if (user) {
+			fetchAdminData(user.uid);
+			setAdminUid(user.uid)
+		  }
+		});
+	
+		return () => {
+		  unSub();
+		};
+		//eslint-disable-next-line
+	  }, []);
+
+
+	const fetchAdminData = async (uid: string) => {
+		const userDocRef = doc(db, "admin", uid);
+		const userDocSnap = await getDoc(userDocRef);
+		if (userDocSnap.exists()) dispatch({ type: "FETCH_ADMIN_DATA", payload: userDocSnap.data() as AdminInfo });
+	}
 
 	const fetchAllUsers = async () => {
 		try {
@@ -491,6 +519,22 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
 		}
 	};
 
+	const updatePayment = async (payload: AdminInfo) => {
+		if (payload && adminUid) {
+			console.log(payload, adminUid)
+		  try {
+			const userRef = doc(db, "admin", "VGRS1zWGzCbgOkAo5iY7QgXyh2t2");
+			await toast.promise(updateDoc(userRef, { ...payload }), {
+			  loading: "Updating Payment Method...",
+			  success: "Payment Method Updated Successfully",
+			  error: "Error Occurred, Try Again",
+			});
+		  } catch (error) {
+			console.log(error);
+		  }
+		}
+	  };
+
 	return (
 		<AdminContext.Provider
 			value={{
@@ -503,6 +547,7 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
 				updateDeposit,
 				updateAccount,
 				updateUser,
+				updatePayment
 			}}
 		>
 			{children}

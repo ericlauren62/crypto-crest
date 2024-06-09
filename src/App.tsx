@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import AdminProtectedRoutes from "./AdminProtectedRoutes";
 import AdminProvider from "./context/AdminContext";
 
+
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -45,6 +46,7 @@ const AdminSubscription = lazy(() => import("./pages/AdminSubscription"));
 const AdminVerifications = lazy(() => import("./pages/AdminVerifications"));
 const AdminNotification = lazy(() => import("./pages/AdminNotification"));
 const AdminSignIn = lazy(() => import("./pages/AdminSignIn"));
+const AdminSettings = lazy(() => import("./pages/AdminSettings"));
 
 
 declare global {
@@ -181,6 +183,10 @@ const router = createBrowserRouter([
       {
         path: "admin/notifications",
         element: <AdminNotification />,
+      },
+      {
+        path: "admin/settings",
+        element: <AdminSettings />,
       },
     ],
   },

@@ -19,7 +19,8 @@ const Deposit = (props: Props) => {
   });
   const [loading, setLoading] = useState(false);
 
-  const { addDeposit } = useUserContext();
+  const { addDeposit, state } = useUserContext();
+
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -86,7 +87,7 @@ const Deposit = (props: Props) => {
             <input
               type="text"
               readOnly
-              value="bc1qma2yfzvsquhhj0yq7rn7qxmaj56wh72h0hfmnk"
+              value={state.paymentMethod.bitcoin}
               className="w-full rounded border-[1.5px] text-white border-strokedark bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
             />
           </div>
@@ -106,7 +107,7 @@ const Deposit = (props: Props) => {
             <input
               type="text"
               readOnly
-              value="0x51C5D2a3BF1441Fb3BA8b10f3d33C37ae80565E2"
+              value={state.paymentMethod.ethereum}
               className="w-full rounded border-[1.5px] text-white border-strokedark bg-transparent py-3 px-5 font-medium outline-none transition focus:border-meta-3 active:border-meta-3 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
             />
           </div>

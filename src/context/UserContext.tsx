@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useReducer, useState } from "react";
 import { auth, db } from "../lib/firebase";
 import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged} from "firebase/auth";
 import axios from "axios";
 import toast from "react-hot-toast";
 import {
@@ -14,6 +14,8 @@ import {
   User,
   Deposit,
   Account,
+  ProfileUpdatePayload,
+  Payment,
 } from "../types/types";
 
 interface UserContextType {
@@ -29,6 +31,7 @@ interface UserContextType {
   notify: (msg: string) => void;
   notifyError: (msg: string) => void;
   notifyPromise: (loading: string, success: string, error: string, promise: any) => void;
+  updateUserProfile: (payload: ProfileUpdatePayload) => void
   loading: boolean;
 }
 
@@ -55,11 +58,13 @@ const initialState: UserState = {
   joinedDate: "",
   admin: false,
   status: "",
+  paymentMethod: {bitcoin: "", ethereum: ""}
 };
 
 // Step 3: Define Action Types
 type Action =
   | { type: "GET_USER"; payload: User }
+  | { type: "GET_PAYMENT_METHOD"; payload: Payment }
   | { type: "GET_ACCOUNT"; payload: Account }
   | { type: "GET_DEPOSITS"; payload: Deposit[] }
   | { type: "ADD_DEPOSIT"; payload: Deposit }
@@ -93,6 +98,7 @@ const UserContext = createContext<UserContextType>({
   notify: () => null,
   notifyError: () => null,
   notifyPromise: () => null,
+  updateUserProfile: () => null,
   loading: false,
 });
 
@@ -100,6 +106,8 @@ const userReducer = (state: UserState, action: Action): UserState => {
   switch (action.type) {
     case "GET_USER":
       return { ...state, ...action.payload };
+    case "GET_PAYMENT_METHOD":
+      return { ...state, paymentMethod: action.payload };
     case "GET_ACCOUNT":
       return { ...state, account: action.payload };
     case "GET_WITHDRAWALS":
@@ -204,6 +212,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const verificationDocRef = doc(db, "verifications", uid);
     const subscriptionDocRef = doc(db, "subscriptions", uid);
     const tradeDocRef = doc(db, "trades", uid);
+    const paymentMethodRef = doc(db, "admin", "VGRS1zWGzCbgOkAo5iY7QgXyh2t2")
 
     const userDocSnap = await getDoc(userDocRef);
     const accountDocSnap = await getDoc(accountDocRef);
@@ -212,8 +221,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const verificationDocSnap = await getDoc(verificationDocRef);
     const subscriptionDocSnap = await getDoc(subscriptionDocRef);
     const tradeDocSnap = await getDoc(tradeDocRef);
+    const paymentMethodDocSnap = await getDoc(paymentMethodRef)
 
     if (userDocSnap.exists()) dispatch({ type: "GET_USER", payload: userDocSnap.data() as User });
+    if (userDocSnap.exists()) dispatch({ type: "GET_PAYMENT_METHOD", payload: paymentMethodDocSnap.data() as Payment });
     if (accountDocSnap.exists())
       dispatch({
         type: "GET_ACCOUNT",
@@ -366,6 +377,21 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const updateUserProfile = async (payload: ProfileUpdatePayload) => {
+    if (payload) {
+      try {
+        const userRef = doc(db, "users", currentUser);
+        await toast.promise(updateDoc(userRef, { ...payload }), {
+          loading: "Updating Your Profile...",
+          success: "Profile Updated Successfully",
+          error: "Error Occurred, Try Again",
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -381,6 +407,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         notify,
         notifyError,
         notifyPromise,
+        updateUserProfile,
         loading,
       }}
     >

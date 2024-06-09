@@ -84,8 +84,8 @@ const DashboardTable = () => {
 							</tbody>
 						)}
 					</table>
-					<div className="w-full text-center mt-3 py-4">
-						{state.trades?.length < 1 && <p className="text-xl">No Recent Trades</p>}
+					<div className="w-full text-center mt-3 py-4 text-white">
+						{state.trades?.length < 1 && <p className="text-xl text-white">No Recent Trades</p>}
 					</div>
 				</div>
 			</div>
