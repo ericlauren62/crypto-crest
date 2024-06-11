@@ -19,7 +19,7 @@ const Withdrawal = (props: Props) => {
 
   const [loading, setLoading] = useState(false);
 
-  const { addWithdrawal } = useUserContext();
+  const { state, addWithdrawal } = useUserContext();
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -63,14 +63,10 @@ const Withdrawal = (props: Props) => {
   return (
     <AdminLayout>
       <div className="grid xl:grid-cols-3 gap-y-8 xl:gap-y-0 xl:gap-x-10 mb-16">
-        <CardDataStats title="Total Balance in Dollars" totalUsd={`100`} />
+        <CardDataStats title="Total Balance in Dollars" totalUsd={state.account.balance} />
         <CardDataStats
           title="Total Balance in Bitcoin"
-          totalBtc={`0.00155436`}
-        />
-        <CardDataStats
-          title="Total Balance in Etherium"
-          totalEth={`0.03185058 `}
+          totalBtc={(Number(state.account.balance) / state.bitcoin).toFixed(8)}
         />
       </div>
       <div className="mb-20 rounded-sm w-full p-6 text-white bg-boxdark shadow-default  dark:bg-transparent">

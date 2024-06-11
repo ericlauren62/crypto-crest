@@ -14,11 +14,11 @@ const UserDashboard = (props: Props) => {
   const { state, loading } = useUserContext();
 
   const totalWithdrawal = state.withdrawals?.reduce(
-    (acc, curr) => (curr.status === "Completed" ? acc + Number(curr.amount) : 0),
+    (acc, curr) => (curr.status === "completed" ? acc + Number(curr.amount) : 0),
     0
   );
   const totalDeposit = state.deposits?.reduce(
-    (acc, curr) => (curr.status === "Completed" ? acc + Number(curr.amount) : 0),
+    (acc, curr) => (curr.status === "completed" ? acc + Number(curr.amount) : 0),
     0
   );
 
