@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../images/LOGO.svg";
+import logo from "../../images/crest-logo-light.svg";
 import { FaHome, FaUsers } from "react-icons/fa";
 import { PiIdentificationBadge } from "react-icons/pi";
 import { MdOutlineUnsubscribe, MdAccountBalance } from "react-icons/md";
@@ -34,11 +34,9 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
     storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
   );
 
-
   useEffect(() => {
-    setStatus(state.status)
-  }, [state])
-  
+    setStatus(state.status);
+  }, [state]);
 
   // close on click outside
   useEffect(() => {
@@ -77,7 +75,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
       }`}
     >
       <div className="flex items-center justify-between gap-2 px-10 py-6 lg:py-7 text-white">
-        <Link to={`/${currentPath}/dashboard`}>
+        <Link to={`/${currentPath}/dashboard`} className="w-[40%]">
           <img src={logo} alt="Logo" />
         </Link>
 
@@ -139,8 +137,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   </Link>
                 </li>
               )}
-              
-              
+
               {!pathname.includes("admin") && (
                 <li>
                   <Link
@@ -153,9 +150,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                     Assets
                   </Link>
                 </li>
-              
               )}
-              
 
               <li>
                 <Link
@@ -168,7 +163,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   Deposits
                 </Link>
               </li>
-              {(status === "active" && !pathname.includes("admin") )&& (
+              {status === "active" && !pathname.includes("admin") && (
                 <li>
                   <Link
                     to={`/user/withdrawal`}
