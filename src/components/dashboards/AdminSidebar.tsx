@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../images/crest-logo-light.svg";
+import logo from "../../images/LOGO.svg";
 import { FaHome, FaUsers } from "react-icons/fa";
 import { PiIdentificationBadge } from "react-icons/pi";
 import { MdOutlineUnsubscribe, MdAccountBalance } from "react-icons/md";
@@ -78,7 +78,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
     >
       <div className="flex items-center justify-between gap-2 px-10 py-6 lg:py-7 text-white">
         <Link to={`/${currentPath}/dashboard`}>
-          <img src={logo} alt="Logo" className="w-[45%]" />
+          <img src={logo} alt="Logo" />
         </Link>
 
         <button
@@ -184,7 +184,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
               {pathname.includes("admin") && (
                 <li>
                   <Link
-                    to={`/admin/withdrawal`}
+                    to={`/${currentPath}/withdrawal`}
                     className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
                       pathname.includes("withdrawal") && "bg-primary-hover "
                     }`}
@@ -237,7 +237,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   <Link
                     to="/admin/verification"
                     className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-primary-hover ${
-                      pathname.includes("verification") && "bg-primary-hover "
+                      pathname.includes("/admin/verification") && "bg-primary-hover "
                     }`}
                   >
                     <PiIdentificationBadge />
