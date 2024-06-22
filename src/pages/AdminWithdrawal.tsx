@@ -139,7 +139,7 @@ const AdminWithdrawal = () => {
                       {withdrawal.status}
                     </p>
                   </td>
-                  {withdrawal.status === "pending" && (
+                  {withdrawal.status.toLowerCase() === "pending" && (
                     <td className="border py-5 px-4 flex items-center gap-x-2 border-strokedark">
                       <button
                         onClick={() => handleUpdateWithdrawalStatus(withdrawal.uid, withdrawal.id)}

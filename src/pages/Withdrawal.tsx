@@ -21,9 +21,7 @@ const Withdrawal = (props: Props) => {
 
   const { state, addWithdrawal } = useUserContext();
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -38,7 +36,7 @@ const Withdrawal = (props: Props) => {
     const payload = {
       method: formData.paymentMethod,
       amount: formData.amount,
-      status: "Pending",
+      status: "pending",
       date: new Date().toDateString(),
       id: uuidv4(),
     };
@@ -71,22 +69,17 @@ const Withdrawal = (props: Props) => {
       </div>
       <div className="mb-20 rounded-sm w-full p-6 text-white bg-boxdark shadow-default  dark:bg-transparent">
         <div className="border-b  py-4 border-strokedark">
-          <h3 className="font-medium text-white">
-            Withdrawal Transaction
-          </h3>
+          <h3 className="font-medium text-white">Withdrawal Transaction</h3>
         </div>
         <div>
           <p className="my-8">
-            To make a withdrawal, Enter amount and verify the address you wish
-            for payment to be made into.
+            To make a withdrawal, Enter amount and verify the address you wish for payment to be made into.
           </p>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="">
             <div className="mb-5">
-              <label className="mb-3 block text-white dark:text-white">
-                Account To Withdraw from
-              </label>
+              <label className="mb-3 block text-white dark:text-white">Account To Withdraw from</label>
               <input
                 type="text"
                 readOnly
@@ -96,9 +89,7 @@ const Withdrawal = (props: Props) => {
             </div>
 
             <div className="mb-5">
-              <label className="mb-3 block text-white dark:text-white">
-                Select Payment Method
-              </label>
+              <label className="mb-3 block text-white dark:text-white">Select Payment Method</label>
               <div className="bg-boxdark bg-form-input mb-3">
                 <select
                   value={formData.paymentMethod}
@@ -115,9 +106,7 @@ const Withdrawal = (props: Props) => {
               </div>
             </div>
             <div className="mb-5">
-              <label className="mb-3 block text-white dark:text-white">
-                Amount
-              </label>
+              <label className="mb-3 block text-white dark:text-white">Amount</label>
               <input
                 value={formData.amount}
                 name="amount"
@@ -128,13 +117,10 @@ const Withdrawal = (props: Props) => {
                 className="w-full rounded-lg border-[1.5px] border-strokedark bg-transparent py-3 px-5 font-medium outline-none transition focus:border-meta-3 active:border-meta-3 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-meta-3"
               />
             </div>
-            {(formData.paymentMethod === "Bitcoin" ||
-              formData.paymentMethod === "Ethereum") && (
+            {(formData.paymentMethod === "Bitcoin" || formData.paymentMethod === "Ethereum") && (
               <div>
                 <div className="mb-5">
-                  <label className="mb-3 block text-white dark:text-white">
-                    Wallet Address
-                  </label>
+                  <label className="mb-3 block text-white dark:text-white">Wallet Address</label>
                   <input
                     type="text"
                     name="walletAddress"
