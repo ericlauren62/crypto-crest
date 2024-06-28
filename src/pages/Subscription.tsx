@@ -30,43 +30,19 @@ const Subscription = (props: Props) => {
       <div className="mb-10 rounded-md border  text-white py-4 px-7 shadow-default border-strokedark bg-boxdark">
         <div className="my-1 flex items-end justify-between">
           <div>
-            <h4 className="text-sm font-bold text-white dark:text-white mb-1">
-              GET SUBSCRIPTION
-            </h4>
+            <h4 className="text-sm font-bold text-white dark:text-white mb-1">GET SUBSCRIPTION</h4>
             <div>
-              <span className="text-sm font-medium block">
-                Tap on any of the Plans below to purchase a plan.
-              </span>
+              <span className="text-sm font-medium block">Tap on any of the Plans below to purchase a plan.</span>
             </div>
           </div>
         </div>
       </div>
       {!state.subscription.plan && (
         <div className="grid md:grid-cols-2 gap-10">
-          <SubscriptionCard
-            plan="STANDARD"
-            roi="10%"
-            planAmount={"5920"}
-            handleClick={subscribe}
-          />
-          <SubscriptionCard
-            plan="SILVER"
-            roi="25%"
-            planAmount={"7370"}
-            handleClick={subscribe}
-          />
-          <SubscriptionCard
-            plan="GOLD"
-            roi="35%"
-            planAmount={"9910"}
-            handleClick={subscribe}
-          />
-          <SubscriptionCard
-            plan="VIP"
-            roi="55%"
-            planAmount={"16350"}
-            handleClick={subscribe}
-          />
+          <SubscriptionCard plan="STANDARD" roi="10%" planAmount={"500"} handleClick={subscribe} />
+          <SubscriptionCard plan="SILVER" roi="25%" planAmount={"5000"} handleClick={subscribe} />
+          <SubscriptionCard plan="GOLD" roi="35%" planAmount={"15000"} handleClick={subscribe} />
+          <SubscriptionCard plan="VIP" roi="55%" planAmount={"30000"} handleClick={subscribe} />
         </div>
       )}
 
@@ -75,23 +51,17 @@ const Subscription = (props: Props) => {
           <div className="text-6xl text-primary mb-3">
             <FaCheckCircle />
           </div>
-          <h2 className="text-2xl font-bold mb-3 text-white dark:text-white">
-            Subscription Confirmed!
-          </h2>
+          <h2 className="text-2xl font-bold mb-3 text-white dark:text-white">Subscription Confirmed!</h2>
           <p className="max-w-150 mb-5 text-white dark:text-white">
-            Your Subscription to{" "}
-            <span className="text-primary">{state.subscription.plan}</span> plan
-            was successful and actively running, <br />
-            Returns attached to the plan will start reflecting on your Portfolio
-            Balance shortly.
+            Your Subscription to <span className="text-primary">{state.subscription.plan}</span> plan was successful and
+            actively running, <br />
+            Returns attached to the plan will start reflecting on your Portfolio Balance shortly.
           </p>
           <h3 className="font-bold mb-3 text-white dark:text-white">
-            Plan Name:{" "}
-            <span className="text-primary">{state.subscription.plan}</span>
+            Plan Name: <span className="text-primary">{state.subscription.plan}</span>
           </h3>
           <p className="font-bold text-white dark:text-white">
-            Subscribed Amount:{" "}
-            <span className="text-primary">{state.subscription.amount}</span>
+            Subscribed Amount: <span className="text-primary">{state.subscription.amount}</span>
           </p>
         </div>
       )}
