@@ -16,6 +16,7 @@ const Subscription = (props: Props) => {
   const subscribe = (plan: string, planAmount: string) => {
     if (planAmount > state.account.balance) {
       toast.error("Insufficient Balance, Deposit and Try Again");
+      return;
     }
 
     const payload: SubscriptionState = {
