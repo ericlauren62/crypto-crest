@@ -163,7 +163,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   Deposits
                 </Link>
               </li>
-              {status === "active" && !pathname.includes("admin") && (
+              {!pathname.includes("admin") && (
                 <li>
                   <Link
                     to={`/user/withdrawal`}
