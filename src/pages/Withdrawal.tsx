@@ -4,6 +4,7 @@ import { CardDataStats } from "../components/dashboards/CardDataStats";
 import WithdrawalTable from "../components/Tables/WithdrawalTable";
 import { useUserContext } from "../context/UserContext";
 import { v4 as uuidv4 } from "uuid";
+import toast from "react-hot-toast";
 
 type Props = {};
 
@@ -32,6 +33,11 @@ const Withdrawal = (props: Props) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+
+    if (state.account.balance < formData.amount) {
+      toast.error("Insufficient Balance");
+      return;
+    }
 
     const payload = {
       method: formData.paymentMethod,
